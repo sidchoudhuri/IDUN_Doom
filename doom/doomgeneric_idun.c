@@ -35,6 +35,7 @@
  */
 
 #include "doomgeneric.h"
+#include "doomkeys.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -94,11 +95,11 @@ static int kq_head = 0, kq_tail = 0;
 
 /* joystick → Doom key mapping */
 static const struct { int bit; unsigned char doomkey; } joy_map[] = {
-    { 0x01, DOOM_KEY_UP_ARROW    },   /* joy up    */
-    { 0x02, DOOM_KEY_DOWN_ARROW  },   /* joy down  */
-    { 0x04, DOOM_KEY_LEFT_ARROW  },   /* joy left  */
-    { 0x08, DOOM_KEY_RIGHT_ARROW },   /* joy right */
-    { 0x10, DOOM_KEY_FIRE        },   /* fire      */
+    { 0x01, KEY_UPARROW   },   /* joy up    */
+    { 0x02, KEY_DOWNARROW },   /* joy down  */
+    { 0x04, KEY_LEFTARROW },   /* joy left  */
+    { 0x08, KEY_RIGHTARROW},   /* joy right */
+    { 0x10, KEY_FIRE      },   /* fire      */
     { 0,    0 }
 };
 
@@ -200,16 +201,16 @@ static void process_input_packet(void)
     {
         int was = (key_flags & 0x01) != 0;
         int now = (new_keys  & 0x01) != 0;
-        if (now && !was) push_key(1, DOOM_KEY_ESCAPE);
-        if (!now && was) push_key(0, DOOM_KEY_ESCAPE);
+        if (now && !was) push_key(1, KEY_ESCAPE);
+        if (!now && was) push_key(0, KEY_ESCAPE);
     }
 
     /* enter / use (bit 1) */
     {
         int was = (key_flags & 0x02) != 0;
         int now = (new_keys  & 0x02) != 0;
-        if (now && !was) push_key(1, DOOM_KEY_ENTER);
-        if (!now && was) push_key(0, DOOM_KEY_ENTER);
+        if (now && !was) push_key(1, KEY_ENTER);
+        if (!now && was) push_key(0, KEY_ENTER);
     }
 
     joy_state = new_joy;

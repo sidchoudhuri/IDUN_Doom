@@ -6,9 +6,10 @@ set -e
 echo "=== IDUN Doom setup ==="
 
 # ── package dependencies ──────────────────────────────────────────────────────
-echo "Installing build tools..."
-sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm \
+# Install only what we need.  Do NOT run -Syu (full upgrade) — the IDUN OS is
+# a specialised Arch build and a system upgrade will break it.
+echo "Installing build tools (no system upgrade)..."
+sudo pacman -S --noconfirm --needed \
     base-devel \
     git \
     acme \

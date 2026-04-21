@@ -5,6 +5,7 @@
 CC      = gcc
 CFLAGS  = -O2 -Wall -Wno-unused-result \
           -Dlinux -D_GNU_SOURCE \
+          -D_strdup=strdup \
           -I. -I$(DOOM_SRC)
 LDFLAGS = -lm
 
